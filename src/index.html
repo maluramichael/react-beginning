@@ -5,11 +5,32 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+    <style>
+    .grid {
+        display: flex;
+    }
+    
+    .widget {
+        border: 1px solid #333;
+        flex: 1;
+        margin: 5px;
+        padding: 5px;
+    }
+    </style>
 </head>
 
 <body>
-    <div id="app"></div>
+    <div class="container">
+        <h1>Widgets</h1>
+        <div class="grid">
+            <div class="widget" id="app"></div>
+            <div class="widget"></div>
+            <div class="widget"></div>
+            <div class="widget"></div>
+            <div class="widget"></div>
+        </div>
+    </div>
     <script src="bundle.js"></script>
 </body>
 

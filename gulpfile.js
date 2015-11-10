@@ -40,8 +40,10 @@ function bundle() {
 }
 
 gulp.task('build.html', function() {
-    return gulp.src(htmlFiles)
-        .pipe(gulp.dest('dist'));
+    watch(htmlFiles, function() {
+        return gulp.src(htmlFiles)
+            .pipe(gulp.dest('dist'));
+    });
 });
 
 
