@@ -15,7 +15,7 @@ var sourceFiles = 'src/**/*.js',
 
 // add custom browserify options here
 var customOpts = {
-    entries: ['./src/dependencies.js', './src/main.js'],
+    entries: ['./src/main.js'],
     debug: true
 };
 
@@ -39,6 +39,21 @@ function bundle() {
         .pipe(gulp.dest('./dist'));
 }
 
+function bundleVendor() {
+    return browserify({
+            entries: ['./src/dependencies.js']
+        })
+        .bundle()
+        .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+        .pipe(source('vendor.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({
+            loadMaps: true
+        }))
+        .pipe(sourcemaps.write('./')) // writes .map file
+        .pipe(gulp.dest('./dist'));
+}
+
 gulp.task('build.html', function() {
     watch(htmlFiles, function() {
         return gulp.src(htmlFiles)
@@ -48,5 +63,6 @@ gulp.task('build.html', function() {
 
 
 gulp.task('bundle', bundle);
+gulp.task('bundle.vendor', bundleVendor);
 
-gulp.task('default', ['build.html', 'bundle']);
+gulp.task('default', ['build.html', 'bundle', 'bundle.vendor']);
